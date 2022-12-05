@@ -1,5 +1,8 @@
 #ifndef WRITE
     #define WRITE
+
+        void erase_main(CanvasBoard Canvas, int* eraseVals);
+        void erase_square(CanvasBoard Canvas, int row, int col);
         void draw_main(CanvasBoard Canvas, int* array);
         void write_line(CanvasBoard Canvas, int start_row, int start_col, int end_row, int end_col);
         bool isInBounds(CanvasBoard Canvas, int start_row, int start_col, int end_row, int end_col);

@@ -36,6 +36,13 @@ bool getCommand(CanvasBoard Canvas) {
                 draw_main(Canvas, write_vals);
             }
             break;
+        /*case 'e' :
+            eraseInputValid = get_erase_input(numEraseArgs, erase_vals); // FIXME: need to set these
+            if (eraseInputValid){
+                erase_main(Canvas, erase_vals);
+            }
+            break; */
+
         case 'a' :
             addInputValid = get_add_input(numAddArgs, &rc_choice, &num_rc);
             break;
