@@ -1,5 +1,5 @@
-paint.out: check_add.o write.o check_write.o print_statements.o quit.o get_command.o input_val.o setup_canvas.o main.o
-	gcc check_add.o write.o check_write.o print_statements.o quit.o get_command.o input_val.o setup_canvas.o  main.o -o paint.out
+paint.out: add.o check_add.o write.o check_write.o print_statements.o quit.o get_command.o input_val.o setup_canvas.o main.o
+	gcc add.o check_add.o write.o check_write.o print_statements.o quit.o get_command.o input_val.o setup_canvas.o  main.o -o paint.out
 
 main.o: main.c input_val.h setup_canvas.h get_command.h
 	gcc -Wall -Werror -Wextra -c main.c
@@ -10,7 +10,7 @@ setup_canvas.o: setup_canvas.c setup_canvas.h
 input_val.o: input_val.h input_val.c
 	gcc -Wall -Werror -Wextra -c input_val.c
 
-get_command.o: get_command.c write.h check_add.h check_write.h get_command.h quit.h main.h
+get_command.o: get_command.c add.h write.h check_add.h check_write.h get_command.h quit.h main.h
 	gcc -Wall -Werror -Wextra -c get_command.c
 
 quit.o: quit.c quit.h main.h

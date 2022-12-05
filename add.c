@@ -7,6 +7,7 @@ void add_main(CanvasBoard Canvas, int *numRows, int *numCols, char choice, int n
     if (!is_rc_inBounds(Canvas, choice, num)) {
         printf("Improper add command.\n");
     }
+    printf("Is inBounds is %i\n", is_rc_inBounds(Canvas, choice, num));
     if (choice == 'r') {
         addRow(Canvas, numRows, numCols, num);
     }
@@ -16,6 +17,7 @@ void add_main(CanvasBoard Canvas, int *numRows, int *numCols, char choice, int n
 }
 
 bool is_rc_inBounds(CanvasBoard Canvas, char choice, int num) {
+    printf("Looking at is_rc_inBounds\n");
     if (choice == 'r') {
         if ((num >= 0) && (num < Canvas.rows)) {
             return true;
