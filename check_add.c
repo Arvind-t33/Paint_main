@@ -61,7 +61,7 @@ bool get_add_input(int numArgs, char *choice, int *num) {
             *choice = c;
         }
         else if(countArgs == 1) {
-            *num = numScanned;
+            *num = scannedNum;
         }
 
         if (numScanned < 0) {

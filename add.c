@@ -17,13 +17,14 @@ void add_main(CanvasBoard Canvas, int *numRows, int *numCols, char choice, int n
 }
 
 bool is_rc_inBounds(CanvasBoard Canvas, char choice, int num) {
-    printf("Looking at is_rc_inBounds\n");
+    //printf("Looking at is_rc_inBounds\n");
     if (choice == 'r') {
         if ((num >= 0) && (num < Canvas.rows)) {
             return true;
         }
     }
     if (choice == 'c') {
+        //printf("currCol = %i\n", num);
         if ((num >= 0) && (num < Canvas.cols)) {
             return true;
         }
@@ -64,5 +65,6 @@ void appendCol(CanvasBoard Canvas, int *numRows, int *numCols) {
     for(int i = 0; i < *numRows; i++){
         Canvas.body[i] = (char*)realloc(Canvas.body[i], (*numCols + 1) * sizeof(char));
         Canvas.body[i][*numCols - 1] = '*';
+        //printf("The character ar row %i is %c\n", i, Canvas.body[i][*numCols - 1]);
     }
 }

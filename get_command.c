@@ -9,7 +9,7 @@
 #include "add.h"
 
 
-bool getCommand(CanvasBoard Canvas) {
+bool getCommand(CanvasBoard Canvas, int *numRows, int *numCols) {
     char command;
 
     bool writeInputValid = true;
@@ -47,7 +47,7 @@ bool getCommand(CanvasBoard Canvas) {
         case 'a' :
             addInputValid = get_add_input(numAddArgs, &rc_choice, &num_rc);
             if (addInputValid) {
-                add_main(Canvas, &Canvas.rows, &Canvas.cols, rc_choice, num_rc);
+                add_main(Canvas, numRows, numCols, rc_choice, num_rc);
             }
             break;
     }
