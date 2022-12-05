@@ -27,3 +27,6 @@ write.o: write.c write.h main.h
 
 check_add.o: check_add.c check_add.h
 	gcc -Wall -Werror -Wextra -c check_add.c
+
+add.o: add.c add.h
+	gcc -Wall -Werror -Wextra -c add.c

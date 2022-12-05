@@ -6,6 +6,7 @@
 #include "check_write.h"
 #include "check_add.h"
 #include "write.h"
+#include "add.h"
 
 
 bool getCommand(CanvasBoard Canvas) {
@@ -45,6 +46,9 @@ bool getCommand(CanvasBoard Canvas) {
 
         case 'a' :
             addInputValid = get_add_input(numAddArgs, &rc_choice, &num_rc);
+            if (addInputValid) {
+                add_main(Canvas, &Canvas.rows, &Canvas.cols, rc_choice, num_rc);
+            }
             break;
     }
 
