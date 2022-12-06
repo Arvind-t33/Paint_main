@@ -15,18 +15,14 @@ bool get_add_input(int numArgs, char *choice, int *num) {
     char spaceChar;
     bool isValid = true;
     *num = -1;
-    //printf("get_input was just called\n");
 
     while ((c != '\n') && (isValid)) {
-        //("scanned input and isValid is %s\n", isValid ? "true" : "false");
         if (countArgs == 0) {
             numScanned = scanf(" %c%c", &c, &spaceChar);
-            //printf("char = %c, spaceChar = %c\n", c, spaceChar);
         }
         else if (countArgs == 1){
             numScanned = scanf(" %i%c", &scannedNum, &c);
         }
-        // printf("countArgs = %i\n", countArgs);
         if (countArgs >= numArgs) {
             printf("Improper add command.\n");
             isValid = false;
@@ -46,11 +42,7 @@ bool get_add_input(int numArgs, char *choice, int *num) {
             }
         }
         else if ((countArgs > 0) && (numScanned >= 1)) {
-            //("numScanned = %i\n", numScanned);
-            // printf("The number is: %i\n", num);
-            // printf("The character is: %c\n", c);
             if (isspace(c) == 0) {
-                //printf("c was not a space\n");
                 printf("Improper add command.\n");
                 isValid = false;
                 return false;
@@ -70,20 +62,15 @@ bool get_add_input(int numArgs, char *choice, int *num) {
             return false;
         }
 
-        // printf("countArgs = %i\n", countArgs);
         countArgs++;
 
     }
 
     if (countArgs < numArgs) {
-            //printf("countArgs = %i\n", countArgs);
             printf("Improper add command.\n");
             isValid = false;
             return false;
     }
 
-    //printf("The char is: %c and num is: %i\n", *choice, *num);
-    //printf("numScanned = %i\n", numScanned);
-    //printf("Executed check_add\n");
     return true;
 }

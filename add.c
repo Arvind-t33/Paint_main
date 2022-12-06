@@ -2,73 +2,86 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "add.h"
+#include "setup_canvas.h" // FIXME: REMOVE THIS ONLY USED IN TESTING
 
 /*void add_main(CanvasBoard Canvas, int *numRowsPointer, int *numColsPointer, char rc_choice, int index_to_add);
 bool is_rc_inBounds(CanvasBoard Canvas, char choice, int index_to_add);
 void addRow(CanvasBoard Canvas, int *numRowsPointer, int index_to_add);
 void addCol(CanvasBoard Canvas, int *numColsPointer, int index_to_add);*/
 
-void add_main(CanvasBoard Canvas, int *numRowsPointer, int *numColsPointer, char rc_choice, int index_to_add){
-    if (!is_rc_inBounds(Canvas, rc_choice, index_to_add)) {
+void add_main(CanvasBoard* CanvasPointer, char rc_choice, int index_to_add){
+    if (!is_rc_inBounds(CanvasPointer, rc_choice, index_to_add)) {
         printf("Improper add command.\n");
     }
     if (rc_choice == 'r') {
-        addRow(Canvas, numRowsPointer, index_to_add);
+        addRow(CanvasPointer, index_to_add);
+        printf("outside of addRow: new rows: %d new cols:%d\n", (*CanvasPointer).rows, (*CanvasPointer).cols); // remove
     }
     else if (rc_choice == 'c') {
-        addCol(Canvas, numColsPointer, index_to_add);
+        addCol(CanvasPointer, index_to_add);
     }
 }
-bool is_rc_inBounds(CanvasBoard Canvas, char choice, int index_to_add){
+bool is_rc_inBounds(CanvasBoard* CanvasPointer, char choice, int index_to_add){
     if (choice == 'r') {
-        if ((index_to_add >= 0) && (index_to_add < Canvas.rows)) {
+        if ((index_to_add >= 0) && (index_to_add < (*CanvasPointer).rows)){
             return true;
+        }
+        else{
+            return false;
         }
     }
     if (choice == 'c') {
-        if ((index_to_add >= 0) && (index_to_add < Canvas.cols)) {
+        if ((index_to_add >= 0) && (index_to_add < (*CanvasPointer).cols)) {
             return true;
+        }
+        else{
+            return false;
         }
     }
     return false;
 }
-void addRow(CanvasBoard Canvas, int *numRowsPointer, int index_to_add){
-    Canvas.body = (char**)realloc(Canvas.body, (Canvas.rows + 1) * sizeof(char*));
-    Canvas.body[Canvas.rows] = malloc(Canvas.cols * sizeof(char));
-    for(int i = Canvas.rows; i >= 0; i--){
-        for(int j = 0; j < Canvas.cols; j++){
+void addRow(CanvasBoard* CanvasPointer, int index_to_add){
+    int rows = (*CanvasPointer).rows;
+    int cols = (*CanvasPointer).cols;
+    (*CanvasPointer).body = (char**)realloc((*CanvasPointer).body, (rows + 1) * sizeof(char*));
+    (*CanvasPointer).body[(*CanvasPointer).rows] = malloc(cols * sizeof(char));
+    for(int i = rows; i >= 0; i--){
+        for(int j = 0; j < cols; j++){
             if(i > index_to_add){
-                Canvas.body[i][j] = Canvas.body[i-1][j];
+                (*CanvasPointer).body[i][j] = (*CanvasPointer).body[i-1][j];
             } 
             else if(i == index_to_add){
-                Canvas.body[i][j] = '*';
+                (*CanvasPointer).body[i][j] = '*';
             }
             else{
                 continue;
             }
         }
     }
-    (*numRowsPointer) = Canvas.rows + 1;
+    (*CanvasPointer).rows = rows + 1;
+    printf("rows = %d\n", (*CanvasPointer).rows);
     return;
 }
-void addCol(CanvasBoard Canvas, int *numColsPointer, int index_to_add){
-    for(int i = 0; i < Canvas.rows; i++){
-        Canvas.body[i] = (char*)realloc(Canvas.body[i], (Canvas.cols + 1) * sizeof(char));
+void addCol(CanvasBoard* CanvasPointer, int index_to_add){
+    int rows = (*CanvasPointer).rows;
+    int cols = (*CanvasPointer).cols;
+    for(int i = 0; i < rows; i++){
+        (*CanvasPointer).body[i] = (char*)realloc((*CanvasPointer).body[i], (cols + 1) * sizeof(char));
     }
-    for(int j = Canvas.cols; j >= 0; j--){
-        for(int i = 0; i < Canvas.rows; i++){
+    for(int j = cols; j >= 0; j--){
+        for(int i = 0; i < rows; i++){
                 if(j > index_to_add){
-                    Canvas.body[i][j] = Canvas.body[i][j-1];
+                    (*CanvasPointer).body[i][j] = (*CanvasPointer).body[i][j-1];
                 }
                 else if(j == index_to_add){
-                    Canvas.body[i][j] = '*';
+                    (*CanvasPointer).body[i][j] = '*';
                 }
                 else{
                     continue;
                 }
         }
     }
-    (*numColsPointer) = Canvas.cols + 1;
+    (*CanvasPointer).cols = cols + 1;
     return;
 }
 

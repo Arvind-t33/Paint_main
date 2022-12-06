@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
 
     char startChar = '*';
     CanvasBoard Canvas;
-
+    CanvasBoard* CanvasP = &Canvas;
     if (isInputValid(argc, argv)) {
         Canvas.rows = atoi(argv[1]);
         Canvas.cols = atoi(argv[2]);
@@ -22,31 +22,16 @@ int main(int argc, char *argv[]) {
         Canvas.rows = 10;
         Canvas.cols = 10;
     }
-
     Canvas.body = createCanvas(Canvas.rows, Canvas.cols, startChar);
-
     showCanvas(Canvas);
-
     bool commandValid = false;
     while (true){
         if (!commandValid) {
-            commandValid = getCommand(Canvas, &Canvas.rows, &Canvas.cols);
+            commandValid = getCommand(Canvas, CanvasP);
         }
-        printf("NumRows = %i\n", Canvas.rows);
-        printf("numCols = %i\n", Canvas.cols);
+        printf("numCols = %i", Canvas.cols); // FIXME: delete
+        printf("numRows = %i\n", Canvas.rows);
         showCanvas(Canvas);
     }
-
-
-
-    // char horiChar = '-';
-    // char vertiChar = '|';
-    // char rdChar = '/';
-    // char ldChar = '\\';
-    // char interChar = '+';
-
-    // printf("%c\n", ldChar);
-
-    //printf("The number of arguments are: %i\n", argc);
     return 0;
 }

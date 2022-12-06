@@ -5,12 +5,15 @@
 #include "print_statements.h"
 #include "check_write.h"
 #include "check_add.h"
+#include "check_resize.h"
 #include "write.h"
 #include "add.h"
 #include "delete.h"
+#include "resize.h"
 
 
-bool getCommand(CanvasBoard Canvas, int *numRowsPointer, int *numColsPointer) {
+
+bool getCommand(CanvasBoard Canvas, CanvasBoard* CanvasPointer) { // goto main after
     char command;
 
     bool writeInputValid = true;
@@ -24,9 +27,13 @@ bool getCommand(CanvasBoard Canvas, int *numRowsPointer, int *numColsPointer) {
 
     bool deleteInputValid = true;
     int numDeleteArgs = 2;
-    
-    //printf("getCommand was called\n");
-    printf("Enter your command: \n"); // Added a newline cuz it looks jank if you dont
+
+    bool resizeInputValid = true;
+    int numResizeArgs = 2;
+    int resize_vals[numResizeArgs];
+
+
+    printf("Enter your command: "); 
     scanf(" %c", &command);
 
     switch(command) {
@@ -51,31 +58,25 @@ bool getCommand(CanvasBoard Canvas, int *numRowsPointer, int *numColsPointer) {
         case 'a' :
             addInputValid = get_add_input(numAddArgs, &rc_choice, &num_rc);
             if (addInputValid) {
-                add_main(Canvas, numRowsPointer, numColsPointer, rc_choice, num_rc);
+                add_main(CanvasPointer, rc_choice, num_rc);
             }
             break;
-        /* case 'r' :
+        case 'r' :
             resizeInputValid = get_resize_input(numResizeArgs, resize_vals);
             if (resizeInputValid){
-                resize_main(Canvas, resize_vals, numRowsPointer, numColsPointer);
+                resize_main(CanvasPointer, resize_vals);
             }
-            break; */
+            break;
         case 'd' :
             deleteInputValid = get_add_input(numDeleteArgs, &rc_choice, &num_rc);
             if (deleteInputValid){
-                delete_main(Canvas, numRowsPointer, numColsPointer, rc_choice, num_rc);
+                delete_main(CanvasPointer, rc_choice, num_rc);
             }
             break; 
+        default :
+            printf("Unrecognized command. Type h for help.\n");
     }
 
-    // for (int i = 0; i < numWriteArgs; i++) {
-    //     printf("the array at index %i is %i\n", i, write_vals[i]);
-    // }
-
-
-    if ((!writeInputValid) || (!addInputValid)) {
-        return false;
-    }
     return false;
 
 }
