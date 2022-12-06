@@ -3,6 +3,21 @@
 #include "main.h" 
 #include "write.h"
 
+void erase_main(CanvasBoard Canvas, int* eraseVals){ //FIXME: add whatever dependencies from get_commands it uses
+    int row = eraseVals[0];
+    int col = eraseVals[1];
+    if(isInBounds(Canvas, row, col, 0, 0)){
+        erase_square(Canvas, row, col);
+    }
+    else{
+        printf("Improper erase command.\n");
+    }
+    return;
+}
+void erase_square(CanvasBoard Canvas, int row, int col){
+    Canvas.body[row][col] = '*';
+    return;
+}
 void draw_main(CanvasBoard Canvas, int* array){
     int startRow = array[0];
     int startCol = array[1];

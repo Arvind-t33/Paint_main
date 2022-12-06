@@ -6,9 +6,11 @@
 #include "check_write.h"
 #include "check_add.h"
 #include "write.h"
+#include "add.h"
+#include "delete.h"
 
 
-bool getCommand(CanvasBoard Canvas) {
+bool getCommand(CanvasBoard Canvas, int *numRowsPointer, int *numColsPointer) {
     char command;
 
     bool writeInputValid = true;
@@ -19,6 +21,10 @@ bool getCommand(CanvasBoard Canvas) {
     int numAddArgs = 2;
     char rc_choice;
     int num_rc;
+
+    bool deleteInputValid = true;
+    int numDeleteArgs = 2;
+    
     //printf("getCommand was called\n");
     printf("Enter your command: \n"); // Added a newline cuz it looks jank if you dont
     scanf(" %c", &command);
@@ -36,9 +42,30 @@ bool getCommand(CanvasBoard Canvas) {
                 draw_main(Canvas, write_vals);
             }
             break;
+        /*case 'e' :
+            eraseInputValid = get_erase_input(numEraseArgs, erase_vals); // FIXME: need to set these
+            if (eraseInputValid){
+                erase_main(Canvas, erase_vals);
+            }
+            break; */
         case 'a' :
             addInputValid = get_add_input(numAddArgs, &rc_choice, &num_rc);
+            if (addInputValid) {
+                add_main(Canvas, numRowsPointer, numColsPointer, rc_choice, num_rc);
+            }
             break;
+        /* case 'r' :
+            resizeInputValid = get_resize_input(numResizeArgs, resize_vals);
+            if (resizeInputValid){
+                resize_main(Canvas, resize_vals, numRowsPointer, numColsPointer);
+            }
+            break; */
+        case 'd' :
+            deleteInputValid = get_add_input(numDeleteArgs, &rc_choice, &num_rc);
+            if (deleteInputValid){
+                delete_main(Canvas, numRowsPointer, numColsPointer, rc_choice, num_rc);
+            }
+            break; 
     }
 
     // for (int i = 0; i < numWriteArgs; i++) {

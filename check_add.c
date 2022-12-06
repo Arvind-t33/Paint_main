@@ -21,7 +21,7 @@ bool get_add_input(int numArgs, char *choice, int *num) {
         //("scanned input and isValid is %s\n", isValid ? "true" : "false");
         if (countArgs == 0) {
             numScanned = scanf(" %c%c", &c, &spaceChar);
-            printf("char = %c, spaceChar = %c\n", c, spaceChar);
+            //printf("char = %c, spaceChar = %c\n", c, spaceChar);
         }
         else if (countArgs == 1){
             numScanned = scanf(" %i%c", &scannedNum, &c);
@@ -61,7 +61,7 @@ bool get_add_input(int numArgs, char *choice, int *num) {
             *choice = c;
         }
         else if(countArgs == 1) {
-            *num = numScanned;
+            *num = scannedNum;
         }
 
         if (numScanned < 0) {
@@ -82,7 +82,8 @@ bool get_add_input(int numArgs, char *choice, int *num) {
             return false;
     }
 
-    printf("The char is: %c and num is: %i\n", *choice, *num);
-    printf("numScanned = %i\n", numScanned);
+    //printf("The char is: %c and num is: %i\n", *choice, *num);
+    //printf("numScanned = %i\n", numScanned);
+    //printf("Executed check_add\n");
     return true;
 }

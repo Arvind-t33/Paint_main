@@ -30,8 +30,10 @@ int main(int argc, char *argv[]) {
     bool commandValid = false;
     while (true){
         if (!commandValid) {
-            commandValid = getCommand(Canvas);
+            commandValid = getCommand(Canvas, &Canvas.rows, &Canvas.cols);
         }
+        printf("NumRows = %i\n", Canvas.rows);
+        printf("numCols = %i\n", Canvas.cols);
         showCanvas(Canvas);
     }
 
